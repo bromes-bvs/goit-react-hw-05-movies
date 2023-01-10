@@ -7,7 +7,7 @@ import { fetchFilms } from 'components/service/tmdbAPI';
 export default function Movies() {
   const [searchList, setSearchList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const [query, setQuery] = useState('');
+  // const [query, setQuery] = useState('')
 
   useEffect(() => {
     const query = searchParams.get('query');
