@@ -1,57 +1,28 @@
-import { Component } from 'react';
-import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
-import Notification from './Notification/Notofication';
-import Section from './Section/Section';
-import Statistics from './Statistics/Statistics';
+import { Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import Reviews from './Reviews/Reviews';
+import Cast from './Cast/Cast';
+import Home from 'pages/Home';
+import Layout from './Layout/Layout';
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+const MovieDetail = lazy(() => import('../pages/MovieDetail'));
+const Movies = lazy(() => import('../pages/Movies'));
 
-  handelFeedback = type => {
-    this.setState({ [type]: this.state[type] + 1 });
-  };
-
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
-  };
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.state;
-    const total = this.countTotalFeedback();
-    if (good !== 0 && total !== 0) {
-      return `${Math.round((good * 100) / total)}%`;
-    }
-    return `${0}%`;
-  };
-
-  render() {
-    const { good, neutral, bad } = this.state;
-    const totalFeedback = this.countTotalFeedback();
-    const positiveFeedback = this.countPositiveFeedbackPercentage();
-
-    return (
-      <>
-        <Section title="Please leave feedback">
-          <FeedbackOptions onLeaveFeedback={this.handelFeedback} />
-        </Section>
-        <Section title="Statistics">
-          {totalFeedback ? (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={totalFeedback}
-              positivePercentage={positiveFeedback}
-            ></Statistics>
-          ) : (
-            <Notification messege="There is no feedback" />
-          )}
-        </Section>
-      </>
-    );
-  }
+export function App() {
+  return (
+    <>
+      <Layout />
+      <Suspense fallback={<div>Wait a minute...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetail />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </Suspense>
+    </>
+  );
 }
