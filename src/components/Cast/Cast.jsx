@@ -24,13 +24,13 @@ export default function Cast() {
     <StyledList>
       {cast.map(({ name, character, image, popularity }) => (
         <StyledItem key={name}>
-          <img src={image ?? defaultImage} alt={image} />
-          <h3>{name}</h3>
-          <p>
-            Character: <b>{character}</b>
+          <img className="cast" src={image ?? defaultImage} alt={image} />
+          <h3 className="cast">{name}</h3>
+          <p className="cast">
+            Character: <b className="cast">{character}</b>
           </p>
-          <p>
-            Popularity: <b>{popularity}</b>
+          <p className="cast">
+            Popularity: <b className="cast">{popularity}</b>
           </p>
         </StyledItem>
       ))}
