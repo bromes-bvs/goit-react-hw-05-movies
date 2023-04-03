@@ -62,7 +62,7 @@ export const GoBackButton = styled.button`
   background-size: 95%;
   background-color: #fff;
 
-  background-image: url('/goit-react-hw-05-movies/static/media/back.2ce001c0aefdf1117b7c.png');
+  background-image: url('/static/media/back.2ce001c0aefdf1117b7c.png');
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.6;
