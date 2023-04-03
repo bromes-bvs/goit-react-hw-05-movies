@@ -14,7 +14,7 @@ export function App() {
       <Layout />
       <Suspense fallback={<div>Wait a minute...</div>}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetail />}>
             <Route path="cast" element={<Cast />} />
